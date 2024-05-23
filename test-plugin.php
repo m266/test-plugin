@@ -16,23 +16,14 @@ GitHub Plugin URI:  https://github.com/m266/test-plugin
 // Plugin-Code
 // Externer Zugriff verhindern
 defined('ABSPATH') || exit();
-// Stand: 23.05.2024
-// Check, ob Plugin aktiv/inaktiv ist
-// Plugin "Test-Plugin" aktiv?
-if (!function_exists('is_plugin_active')) {
-require_once ABSPATH . '/wp-admin/includes/plugin.php';
+// Erinnerung an Git Updater
+register_activation_hook(__FILE__, 'wphgb_activate'); // Funktions-Name anpassen
+function wphgb_activate()
+{ // Funktions-Name anpassen
+    $to = get_option('admin_email');
+    $subject = 'Plugin "WP H-Guestbook"'; // Plugin-Name anpassen
+    $message = 'Falls nicht vorhanden:
+Bitte das Plugin "Git Updater" hier https://herbrand.org/tutorials/github/git-updater/ herunterladen,
+installieren und aktivieren, um weiterhin Updates zu erhalten!';
+    wp_mail($to, $subject, $message);
 }
-if (is_plugin_active('test-plugin/test-plugin.php')) {
-function test_plugin_notice() { ?>
-<div class="notice notice-error">
-<p><?php _e('Die Entwicklung des Plugins "Test-Plugin" wurde eingestellt. Bitte nach dieser Anleitung vorgehen: https://herbrand.org/wordpress/eigene-plugins/wp-h-data-protection/!');?></p>
-</div>
-<?php
-}
-add_action( 'load-index.php',
-function(){
-add_action( 'admin_notices', 'test_plugin_notice' );
-}
-);
-}
-?>
