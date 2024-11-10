@@ -5,7 +5,7 @@ Plugin URI:         https://github.com/m266/test-plugin
 Description:        Test-Plugin
 Author:             Hans M. Herbrand
 Author URI:         https://www.herbrand.org
-Version:            1.5
+Version:            1.4
 Date:               2024-05-24
 Text Domain:        test-plugin
 License:            GNU General Public License v2 or later
